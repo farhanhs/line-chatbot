@@ -54,7 +54,7 @@ def handle_message(event):
         TextSendMessage(text=event.message.text))
     user_id = event.source.user_id
     try:
-        line_bot_api.push_message(user_id, TextSendMessage(text='我是印度大蟒蛇'))
+        line_bot_api.push_message(user_id, TextSendMessage(text=user_id+'是印度大蟒蛇'))
     except LineBotApiError as e:
     # error handle
         raise e
