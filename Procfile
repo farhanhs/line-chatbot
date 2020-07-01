@@ -1,1 +1,1 @@
-web: gunicorn line-chat-bot-sean:app
+web: gunicorn main:app
