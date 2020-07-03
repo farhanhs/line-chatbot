@@ -59,8 +59,8 @@ def handle_message(event):
     except LineBotApiError as e:
     # error handle
         raise e
-    package_id = "1181660"
-    sticker_id = "17389429"
+    package_id = "1"
+    sticker_id = "1"
     # package_id = "1181660"
     # sticker_id = "7389429"
     try:
