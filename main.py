@@ -52,14 +52,14 @@ def handle_message(event):
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=event.message.text))
+    user_id = event.source.user_id
     package_id = "1"
     sticker_id = "2"
     # package_id = "1181660"
     # sticker_id = "7389429"
     try:
-        line_bot_api.push_message(
-            event.reply_token, TextSendMessage(text='我是印度大蟒蛇'))
-        line_bot_api.push_message(event.reply_token, StickerSendMessage(package_id=package_id, sticker_id=sticker_id))
+        line_bot_api.push_message(user_id, TextSendMessage(text='我是印度大蟒蛇'))
+        line_bot_api.push_message(user_id, StickerSendMessage(package_id=package_id, sticker_id=sticker_id))
     except LineBotApiError as e:
     # error handle
         print(e.status_code)
