@@ -9,12 +9,9 @@ from linebot.exceptions import (
 from linebot.models import (
     MessageEvent, TextMessage, TextMessage, StickerSendMessage,FollowEvent
 )
-from flask.ext.sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
-app.config['postgres://cylegcylzxwpwj:dc166c1f65eb773e5afb3e8049b5b5745a6134cfede1af72fb9c6d314cb80514@ec2-35-172-73-125.compute-1.amazonaws.com:5432/d63rc5ndhs0nhb'] = 'postgresql://localhost/postgresql-globular-31142'
-db = SQLAlchemy(app)
 line_bot_api = LineBotApi('i8QhiXQup8rdl6IPnGgIMp65u8Z54IjMrBWkvUMf5wCElTrDd8Qe/8vgf5AksmRI5ZaxAptKhyAsZwCGocAnRA78MXndZ0IS5MxAwCwoIUYsGSd3Jt8ifVEvI8iIGhOv+52sgs+Ya4eqHunaJESP6AdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('b1ec8ca0fbdca57105c818c8f0d85940')
 
@@ -98,26 +95,13 @@ def handle_follow(event):
             thumbnail_image_url='https://06imgmini.eastday.com/mobile/20180911/20180911033555_983b530c3845a1c818fd76c086a5587d_3.jpeg',
             title='Menu',
             text='Please select',
-            actions=[
-                PostbackAction(
-                    label='回傳動作', date='special', text='以用戶身份發話'
-                )
-                MessageAction(
-                    label='message',
-                    text='message text')
-                URIAction(
-                    label='自拍輸入'
-                    uri='https://line.me/R/nv/camera/'
-                )
-            ),
-
-        ]
+            actions=[PostbackAction(label='回傳動作', date='special', text='以用戶身份發話')]
     )
     )
 
-        follow_text_send_message=TextMessage('kkk')
+    follow_text_send_message=TextMessage('kkk')
 
-        line_bot.reply_message(event.reply_token, follow_text_send_message)
+    line_bot.reply_message(event.reply_token, follow_text_send_message)
 
 if __name__ == "__main__":
     app.run()
