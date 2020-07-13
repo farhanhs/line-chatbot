@@ -7,7 +7,7 @@ from linebot.exceptions import (
     InvalidSignatureError, LineBotApiError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, StickerSendMessage,FollowEvent,TemplateSendMessage,ButtonsTemplate,PostbackAction
+    MessageEvent, TextMessage, TextSendMessage, StickerSendMessage,FollowEvent,TemplateSendMessage,ButtonsTemplate,PostbackAction,ImageMessage
 )
 
 app = Flask(__name__)
@@ -92,13 +92,33 @@ def handle_follow(event):
     buttons_template_message = TemplateSendMessage(
         alt_text='Buttons template',
         template=ButtonsTemplate(
-            thumbnail_image_url='https://06imgmini.eastday.com/mobile/20180911/20180911033555_983b530c3845a1c818fd76c086a5587d_3.jpeg',
+            thumbnail_image_url='https://i2.kknews.cc/SIG=k2b84c/n61o000109s2r818333p.jpg',
             title='Menu',
             text='Please select',
-            actions=[PostbackAction(label='回傳動作', date='special', text='以用戶身份發話')]
+            actions=[
+                PostbackAction(
+                    label='postback',
+                    display_text='postback text',
+                    data='action=buy&itemid=1'
+                ),
+                MessageAction(
+                    label='message',
+                    text='message text'
+                ),
+                URIAction(
+                    label='uri',
+                    uri='http://example.com/'
+                )
+            ]
+        )
     )
-    )
+    line_bot_api.push_message(user_id,buttons_template_message)
 
+@handler.add(MessageEvent, message=ImageMessage)
+def handle_image_message(event):
+    message_id = event.message_id
+    image_id_text_send_messages = TextSendMessage(text=message_id)
+    line_bot_api.reply_message(event.reply_token, image_id_text_send_messages)
 
 if __name__ == "__main__":
     app.run()
