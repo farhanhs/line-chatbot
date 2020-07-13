@@ -7,7 +7,7 @@ from linebot.exceptions import (
     InvalidSignatureError, LineBotApiError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextMessage, StickerSendMessage,FollowEvent
+    MessageEvent, TextMessage, TextSendMessage, StickerSendMessage,FollowEvent,TemplateSendMessage,ButtonsTemplate,PostbackAction
 )
 
 app = Flask(__name__)
@@ -99,9 +99,6 @@ def handle_follow(event):
     )
     )
 
-    follow_text_send_message=TextMessage('kkk')
-
-    line_bot.reply_message(event.reply_token, follow_text_send_message)
 
 if __name__ == "__main__":
     app.run()
