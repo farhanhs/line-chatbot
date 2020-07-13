@@ -116,7 +116,7 @@ def handle_follow(event):
 
 @handler.add(MessageEvent, message=ImageMessage)
 def handle_image_message(event):
-    message_id = event.message_id
+    message_id = event.source.user_id
     image_id_text_send_messages = TextSendMessage(text=message_id)
     line_bot_api.reply_message(event.reply_token, image_id_text_send_messages)
 
