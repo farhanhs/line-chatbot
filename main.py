@@ -7,7 +7,7 @@ from linebot.exceptions import (
     InvalidSignatureError, LineBotApiError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, StickerSendMessage,FollowEvent,TemplateSendMessage,ButtonsTemplate,PostbackAction,ImageMessage,MessageAction,URIAction
+    MessageEvent, TextMessage, TextSendMessage, StickerSendMessage, FollowEvent, TemplateSendMessage, ButtonsTemplate, PostbackAction, ImageMessage, MessageAction, URIAction,
 )
 import os
 #import connect_sql as cs
@@ -127,7 +127,7 @@ def handle_follow(event):
 def handle_image_message(event):
     #message_id = event.source.user_id
     #請line抓圖片
-    image_temp_variable = line_bot_api.get_message_contect(event.message.id)
+    image_temp_variable = line_bot_api.get_message_content(event.message.id)
     #圖片儲存
     imgname = event.message.id+'.jpg'
     with open (imgname,'wb')as f:
