@@ -10,7 +10,7 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage, StickerSendMessage,FollowEvent,TemplateSendMessage,ButtonsTemplate,PostbackAction,ImageMessage,MessageAction,URIAction
 )
 import os
-import connect_sql as cs
+#import connect_sql as cs
 
 import boto3
 s3Client = boto3.client(
