@@ -78,7 +78,7 @@ def handle_message(event):
 
 @handler.add(FollowEvent)
 def handle_follow(event):
-    user_profile = line_bot_api.get_profile(event.source.user_id)
+    #user_profile = line_bot_api.get_profile(event.source.user_id)
     user_id = event.source.user_id
     #print(user_profile.user_id)
     #with open('./user.txt', 'a') as myfile:
@@ -125,13 +125,13 @@ def handle_follow(event):
 #收到圖片消息，從line上面抓回來並且以檔名消息id命名，上傳到s3,位置student01/id.jpg
 @handler.add(MessageEvent, message=ImageMessage)
 def handle_image_message(event):
-    message_id = event.source.user_id
+    #message_id = event.source.user_id
     #請line抓圖片
     image_temp_variable = line_bot_api.get_message_contect(event.message.id)
     #圖片儲存
     imgname = event.message.id+'.jpg'
     with open (imgname,'wb')as f:
-        for chunk in image_temp.iter_contect():
+        for chunk in image_temp_variable.iter_contect():
             f.write(chunk)
     #upload s3
     s3Client.upload_file(imgname, 'iii-tutorial-v2', 'student01/'+imgname)
