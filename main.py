@@ -101,8 +101,8 @@ def handle_follow(event):
         alt_text='打你有什麼錯',
         template=ButtonsTemplate(
             thumbnail_image_url='https://i2.kknews.cc/SIG=k2b84c/n61o000109s2r818333p.jpg',
-            title='Menu',
-            text='Please select',
+            title='課程資訊',
+            text='選擇你要的課程資訊',
             actions=[
                 PostbackAction(
                     label='postback',
@@ -139,5 +139,5 @@ def handle_image_message(event):
     line_bot_api.reply_message(event.reply_token, image_id_text_send_messages)
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0',port=os.environ['PORT'])
+    app.run()
 

@@ -48,6 +48,3 @@ class pgSQL():
         print("PostgreSQL connection is closed")
 
 
-pgSQL().connectSQL()
-pgSQL().buildsheet()
-pgSQL().closedlink()
