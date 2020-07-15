@@ -131,7 +131,7 @@ def handle_image_message(event):
     #圖片儲存
     imgname = event.message.id+'.jpg'
     with open (imgname,'wb')as f:
-        for chunk in image_temp_variable.iter_contect():
+        for chunk in image_temp_variable.iter_content():
             f.write(chunk)
     #upload s3
     s3Client.upload_file(imgname, 'iii-tutorial-v2', 'student01/'+imgname)
