@@ -9,7 +9,15 @@ from linebot.exceptions import (
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage, StickerSendMessage,FollowEvent,TemplateSendMessage,ButtonsTemplate,PostbackAction,ImageMessage,MessageAction,URIAction
 )
+import os
+import connect_sql as cs
 
+import boto3
+s3Client = boto3.client(
+    's3',
+    aws_access_key_id='AKIAR4NDUH53GWDLQFNM',
+    aws_secret_access_key='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'
+)
 app = Flask(__name__)
 
 line_bot_api = LineBotApi('i8QhiXQup8rdl6IPnGgIMp65u8Z54IjMrBWkvUMf5wCElTrDd8Qe/8vgf5AksmRI5ZaxAptKhyAsZwCGocAnRA78MXndZ0IS5MxAwCwoIUYsGSd3Jt8ifVEvI8iIGhOv+52sgs+Ya4eqHunaJESP6AdB04t89/1O/w1cDnyilFU=')
@@ -90,7 +98,7 @@ def handle_follow(event):
     #       text：發一個textevent
     #       data:會發一個postbackenevt給server
     buttons_template_message = TemplateSendMessage(
-        alt_text='Buttons template',
+        alt_text='打你有什麼錯',
         template=ButtonsTemplate(
             thumbnail_image_url='https://i2.kknews.cc/SIG=k2b84c/n61o000109s2r818333p.jpg',
             title='Menu',
@@ -114,12 +122,22 @@ def handle_follow(event):
     )
     line_bot_api.push_message(user_id,buttons_template_message)
 
+#收到圖片消息，從line上面抓回來並且以檔名消息id命名，上傳到s3,位置student01/id.jpg
 @handler.add(MessageEvent, message=ImageMessage)
 def handle_image_message(event):
     message_id = event.source.user_id
-    image_id_text_send_messages = TextSendMessage(text=message_id)
+    #請line抓圖片
+    image_temp_variable = line_bot_api.get_message_contect(event.message.id)
+    #圖片儲存
+    imgname = event.message.id+'.jpg'
+    with open (imgname,'wb')as f:
+        for chunk in image_temp.iter_contect():
+            f.write(chunk)
+    #upload s3
+    s3Client.upload_file(imgname, 'iii-tutorial-v2', 'student01/'+imgname)
+    image_id_text_send_messages = TextSendMessage(event.message.id)
     line_bot_api.reply_message(event.reply_token, image_id_text_send_messages)
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host='0.0.0.0',port=os.environ['PORT'])
 
