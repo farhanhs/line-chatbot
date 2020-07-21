@@ -2,4 +2,4 @@ line-bot-sdk
 gunicorn
 flask
 psycopg2
-boto3
+imgurpython
