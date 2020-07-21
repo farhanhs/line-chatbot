@@ -8,7 +8,7 @@ from linebot.exceptions import (
     InvalidSignatureError, LineBotApiError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, StickerSendMessage, FollowEvent, TemplateSendMessage, ButtonsTemplate, PostbackAction, ImageMessage, MessageAction, URIAction,
+    MessageEvent, TextMessage, TextSendMessage, StickerSendMessage, FollowEvent, TemplateSendMessage, ButtonsTemplate, PostbackAction, ImageMessage, MessageAction, URIAction,VideoMessage,VideoSendMessage
 )
 import os
 import connect_sql as cs
